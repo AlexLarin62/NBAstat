@@ -14,6 +14,18 @@ const indexRouter = require('./routes/index');
 app.set('view engine', 'hbs');
 app.set('views', path.join(__dirname, 'views'));
 
+app.use(express.urlencoded({ extended: true }));
+app.use(express.json())
+app.use(express.static('public'))
+app.use(cookieParser());
+app.use(session({
+  secret: '8u54trgh9but349rgjoi53eigrpj4wegrjpo', 
+  resave: false,
+  saveUninitialized: false,
+  name: 'nbaStatSession',
+  cookie: { secure: false },
+  store: new FileStore({}),
+}));
 
 app.use('/', indexRouter);
 
